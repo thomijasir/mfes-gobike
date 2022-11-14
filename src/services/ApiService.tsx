@@ -12,9 +12,11 @@ class ApiService {
 
   constructor() {
     this.APIClient = axios.create({
-      baseURL: '/',
+      baseURL: 'https://earth-data-store.hasura.app/api/rest',
       timeout: parseInt(process.env.TIMEOUT || '30000', 10),
       headers: {
+        'x-hasura-admin-secret':
+          'umf5EZofLHZgU3zxSdm4kRdQOIIwwKxLNMnNXXRbi5YglLAu3Yj1MjQHXWCJjnHY',
         'X-Client-Version': packageInfo.version,
       },
     });

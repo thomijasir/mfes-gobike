@@ -1,10 +1,9 @@
 import { useState } from 'react';
 
-export const useStorage = (key: string, initialValue: any = '') => {
+const useStorage = (key: string, initialValue: any = '') => {
   const [storedValue, setStoredValue] = useState(() => {
     try {
-      const item = window.localStorage.getItem(key);
-      return item ? JSON.parse(item) : initialValue;
+      return window.localStorage.getItem(key) || initialValue;
     } catch (error) {
       return initialValue;
     }
@@ -23,5 +22,11 @@ export const useStorage = (key: string, initialValue: any = '') => {
     }
   };
 
-  return [storedValue, setValue];
+  const clearStorage = () => {
+    window.localStorage.clear();
+  };
+
+  return [storedValue, setValue, clearStorage];
 };
+
+export default useStorage;

@@ -5,6 +5,7 @@ import { IErrorGeneralProps } from '../components/ErrorGeneral/ErrorGeneral.comp
 export interface IAppContext {
   loadingState: ILoadingGeneralProps;
   errorState: IErrorGeneralProps;
+  userData: any;
   setContext: (payload: any, type: string) => void;
   setLoading: (isLoading: boolean, text?: string) => void;
   setError: (isError: boolean, title?: string, message?: string) => void;
@@ -22,6 +23,7 @@ export const initialState: IAppContext = {
     message:
       'Opps, please check app configuration or service that might cause this error.',
   },
+  userData: {},
   setContext: () => ({}),
   setLoading: () => ({}),
   setError: () => ({}),
@@ -38,6 +40,7 @@ export const makeInitialState = (): IAppContext => {
 // TYPE ACTION
 export const SET_LOADING = 'SET_LOADING';
 export const SET_ERROR = 'SET_ERROR';
+export const SET_USER = 'SET_USER';
 
 // REDUCERS
 export default (state: IAppContext, action: any) => {
@@ -51,6 +54,11 @@ export default (state: IAppContext, action: any) => {
       return {
         ...state,
         errorState: action.payload,
+      };
+    case SET_USER:
+      return {
+        ...state,
+        userData: action.payload,
       };
     default:
       return state;
